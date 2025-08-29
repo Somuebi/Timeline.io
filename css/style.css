@@ -1,0 +1,114 @@
+:root {
+    --bg-deep-purple: #270722;
+    --bg-pale-green: #EAF9D9;
+    --cta-deep-red: #AC3931;
+    --secondary-lavender: #E3D8F1;
+    --text-slate-gray: #858786;
+    --text-light: #F0F0F0;
+
+    --font-heading: 'Allan', serif;
+    --font-body: 'Amiko', sans-serif;
+}
+
+/* --- General Resets & Body Styles --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-deep-purple);
+    color: var(--text-light);
+    height: 100vh; /* Make body fill the full viewport height */
+    overflow: hidden; /* Prevent accidental scrolling */
+}
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important;
+}
+
+/* --- Welcome Screen --- */
+#welcome-screen {
+    /* Uses flexbox to center its direct child */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.welcome-box {
+    /* Styling for the box itself */
+    background-color: var(--secondary-lavender);
+    color: var(--bg-deep-purple);
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    max-width: 500px;
+}
+
+.welcome-box h1 {
+    /* Apply the special heading font */
+    font-family: var(--font-heading);
+    margin-bottom: 1rem;
+}
+
+/* --- Reusable Components --- */
+.cta-button {
+    background-color: var(--cta-deep-red);
+    color: white;
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: opacity 0.2s; /* Adds a nice hover effect */
+}
+
+.cta-button:hover {
+    opacity: 0.9;
+}
+
+/* --- Main App Layout --- */
+#app-container {
+    display: flex;
+    flex-direction: column; /* Stacks header and main vertically */
+    height: 100vh;
+}
+
+#app-header {
+    display: flex;
+    justify-content: space-between; /* Pushes profile to the left and actions to the right */
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.2); /* A subtle dark background for the header */
+}
+
+#app-main {
+    flex-grow: 1; /* Allows the main content to fill all available space */
+    position: relative; /* Needed for positioning the floating action buttons later */
+}
+
+/* --- Header Components --- */
+#user-profile-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Creates space between the avatar and username */
+}
+
+#profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Makes the image a perfect circle */
+    background-color: var(--secondary-lavender); /* Placeholder color */
+    border: 2px solid var(--text-slate-gray);
+}
+
+#profile-username {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
