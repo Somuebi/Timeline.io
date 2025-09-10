@@ -1,34 +1,55 @@
-// --- Element Selections ---
-// Screens
-const welcomeScreen = document.querySelector('#welcome-screen');
-const appContainer = document.querySelector('#app-container');
+// js/main.js
+import { createProfile, loadProfile } from './profile.js';
 
-// Modals & Overlays
-const modalOverlay = document.querySelector('#modal-overlay');
-const profileCreationModal = document.querySelector('#profile-creation-modal');
+// DOM Elements
+const profileCreationView = document.getElementById('profile-creation-view');
+const mainView = document.getElementById('main-view');
+const profileForm = document.getElementById('profile-form');
+const usernameInput = document.getElementById('username-input');
+const welcomeMessage = document.getElementById('welcome-message');
 
-// Buttons
-const newProfileBtn = document.querySelector('#new-profile-btn');
-const saveProfileBtn = document.querySelector('#save-profile-btn');
+/**
+ * Updates the UI to show the main view for an existing user.
+ * @param {object} profile - The user's profile object.
+ */
+function showMainView(profile) {
+    welcomeMessage.textContent = `Welcome, ${profile.username}!`;
+    profileCreationView.classList.add('hidden');
+    mainView.classList.remove('hidden');
+}
 
-// Form Inputs
-const usernameInput = document.querySelector('#username-input');
+/**
+ * Updates the UI to show the profile creation form for a new user.
+ */
+function showProfileCreationView() {
+    profileCreationView.classList.remove('hidden');
+    mainView.classList.add('hidden');
+}
 
-// More element selections will be added here as we build...
+// --- Event Listeners and Initialization ---
 
-// --- Event Listeners ---
-newProfileBtn.addEventListener('click', () => {
-    showModal(profileCreationModal);
+// Handle the profile creation form submission
+profileForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent the browser from reloading the page
+    const username = usernameInput.value.trim();
+
+    if (username) {
+        const newProfile = createProfile(username);
+        showMainView(newProfile);
+    }
 });
 
-// --- Functions ---
-function showModal(modalElement) {
-    modalOverlay.classList.remove('hidden');
-    modalElement.classList.remove('hidden');
+// Main function to run when the app starts
+function initializeApp() {
+    const userProfile = loadProfile();
+    if (userProfile) {
+        console.log('Profile found:', userProfile);
+        showMainView(userProfile);
+    } else {
+        console.log('No profile found. Showing creation view.');
+        showProfileCreationView();
+    }
 }
 
-function hideModal(modalElement) {
-    modalOverlay.classList.add('hidden');
-    modalElement.classList.add('hidden');
-}
-
+// Run the app
+initializeApp();
