@@ -18,6 +18,17 @@ const usernameInput = document.querySelector('#username-input');
 
 // --- Event Listeners ---
 newProfileBtn.addEventListener('click', () => {
-    // We'll show the modal here
-    console.log('New Profile button clicked!');
+    showModal(profileCreationModal);
 });
+
+// --- Functions ---
+function showModal(modalElement) {
+    modalOverlay.classList.remove('hidden');
+    modalElement.classList.remove('hidden');
+}
+
+function hideModal(modalElement) {
+    modalOverlay.classList.add('hidden');
+    modalElement.classList.add('hidden');
+}
+
